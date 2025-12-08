@@ -11,6 +11,16 @@ namespace ToDoDooDoo.services
     {
         private static DateTime now = DateTime.Now;
 
+        private static void SetCompleted(int todoNumber, bool isCompleted)
+        {
+            List<string> lines = Repository.getDataFile(now);
+            string[] info = lines[todoNumber].Split(',');
+            info[2] = Convert.ToString(isCompleted);
+            info[4] = isCompleted ? DateTime.Now.ToString() : "";
+            lines[todoNumber] = string.Join(',', info);
+            File.WriteAllLines(Repository.getFilePath(now), lines, Encoding.UTF8);
+        }
+
         public static void List(DateTime date)
         {
             List<string> lines = Repository.getDataFile(date);
@@ -50,20 +60,12 @@ namespace ToDoDooDoo.services
         }
         public static void Done(int todoNumber)
         {
-            List<string> lines = Repository.getDataFile(now);
-            string[] info = lines[todoNumber].Split(',');
-            info[2] = "True";
-            lines[todoNumber] = string.Join(',', info);
-            File.WriteAllLines(Repository.getFilePath(now), lines, Encoding.UTF8);
+            SetCompleted(todoNumber - 1, true);
         }
 
         public static void Undone(int todoNumber)
         {
-            List<string> lines = Repository.getDataFile(now);
-            string[] info = lines[todoNumber].Split(',');
-            info[2] = "False";
-            lines[todoNumber] = string.Join(',', info);
-            File.WriteAllLines(Repository.getFilePath(now), lines, Encoding.UTF8);
+            SetCompleted(todoNumber - 1, false);
         }
 
         public static void Delete(int todoNumber) 

@@ -13,13 +13,13 @@ namespace ToDoDooDoo.services
 
         public static string getFilePath(DateTime date)
         {
-            string path = dataDirectory + date.ToString("yyyy-MM-dd") + ".txt";
+            string path = dataDirectory + date.ToString("dd-MM-yyyy") + ".txt";
             return path;
         }
 
         public static List<string> getDataFile(DateTime date)
         {
-            if (!File.Exists(dataDirectory + date.ToString("yyyy-MM-dd") + ".txt"))
+            if (!File.Exists(dataDirectory + date.ToString("dd-MM-yyyy") + ".txt"))
             {
                 return [];
             }

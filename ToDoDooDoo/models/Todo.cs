@@ -24,14 +24,10 @@ namespace ToDoDooDoo.models
         public void printTodo(int todoNumber)
         {
             Console.WriteLine(todoNumber + ". " + this.text);
-            Console.Write("Выполнено: " + (this.completed ? "Да" : "Нет") + ". ");
+            Console.WriteLine("Выполнено: " + (this.completed ? "[X]" : "[ ]"));
             if (this.completed)
             {
                 Console.WriteLine("Время выполнения: " + this.completedAt);
-            }
-            else
-            {
-                Console.WriteLine();
             }
         }
     }
